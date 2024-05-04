@@ -1,33 +1,25 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-//Code to import Budget.js
 import Budget from './components/Budget';
-
-// Add code to import the other components here under
 import Remaining from './components/Remaining';
 import ExpenseItem from './components/ExpenseItem';
 import ExpenseList from './components/ExpenseList';
 import ExpenseTotal from './components/ExpenseTotal';
 import AllocationForm from './components/AllocationForm';
 import CurrencyDropdown from './components/CurrencyDropdown';
-
-
 import { AppProvider } from './context/AppContext';
+import { CurrencyContext } from './context/CurrencyContext'; // import the context
+
 const App = () => {
+    const [currency, setCurrency] = useState('£'); // add state for the currency
+
     return (
         <AppProvider>
-            <div className='container'>
+            <CurrencyContext.Provider value={{ currency, setCurrency }}> {/* pass the currency and setCurrency to the provider */}
+                <div className='container'>
                 <h1 className='mt-3'>Company's Budget Allocation</h1>
                     <div className='row mt-3'>
                         {
-                            /* currency dropdown */
-                            <div className='col-sm'>
-                                <CurrencyDropdown />
-                            </div>
-                        }
-                        {
                             /* Add Budget component here */
                             // Budget component
                             <div className='col-sm'>
@@ -49,7 +41,14 @@ const App = () => {
                             <div className='col-sm'>
                                 <ExpenseTotal />
                             </div>
-                        }        
+                        } 
+
+                        {
+                            /* currency dropdown */
+                            <div className='col-sm'>
+                                <CurrencyDropdown />
+                            </div>
+                        }       
                        
                         {
                             /* Add ExpenseList component here */
@@ -74,7 +73,9 @@ const App = () => {
 
                 </div>
             </div>
+            </CurrencyContext.Provider>
         </AppProvider>
     );
 };
+
 export default App;

@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { CurrencyContext } from '../context/CurrencyContext';
 
 const CurrencyDropdown = () => {
-    const [currency, setCurrency] = useState('$ Dollar');
+    const { currency, setCurrency } = useContext(CurrencyContext);
 
-    const handleCurrencyChange = (event) => {
+    const changeCurrency = (event) => {
         setCurrency(event.target.value);
     }
 
     return (
-        <div className='alert alert-secondary'>
-            <select id='currencySelect' value={currency} onChange={handleCurrencyChange}>
-                <option value="$ Dollar">$ Dollar</option>
-                <option value="£ Pound">£ Pound</option>
-                <option value="€ Euro">€ Euro</option>
-                <option value="₹ Rupee">₹ Rupee</option>
-            </select>
-        </div>
+        <select className="btn btn-success" id="inputGroupSelect03" value={currency} onChange={changeCurrency}>
+            <option value="£">£ Pound</option>
+            <option value="$">$ Dollar</option>
+            <option value="€">€ Euro</option>
+            <option value="₹">₹ Rupee</option>
+        </select>
     );
 };
 

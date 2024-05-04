@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
+import { CurrencyContext } from '../context/CurrencyContext';
 
 const AllocationForm = (props) => {
     const { dispatch,remaining  } = useContext(AppContext);
+    const { currency } = useContext(CurrencyContext); 
 
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
@@ -11,7 +13,7 @@ const AllocationForm = (props) => {
     const submitEvent = () => {
 
             if(cost > remaining) {
-                alert("The value cannot exceed remaining funds  £"+remaining);
+                alert(`The value cannot exceed remaining funds ${currency}${remaining}`);
                 setCost("");
                 return;
             }
@@ -40,6 +42,7 @@ const AllocationForm = (props) => {
 
     return (
         <div>
+            <h2>Change Allocation</h2>
             <div className='row'>
 
             <div className="input-group mb-3" style={{ marginLeft: '2rem' }}>
@@ -64,13 +67,16 @@ const AllocationForm = (props) => {
                 <option value="Reduce" name="Reduce">Reduce</option>
                   </select>
 
-                    <input
+                    <div className="input-group-prepend">
+                        <label className="input-group-text" htmlFor="cost" style={{marginLeft: '2rem'}}>{currency}</label>
+                    </div> 
+<input
                         required='required'
                         type='number'
                         id='cost'
                         min='0'
                         value={cost}
-                        style={{ marginLeft: '2rem' , size: 10}}
+                        style={{ marginLeft: '0' , size: 10}}
                         onChange={(event) => {
                             const value = event.target.value;
                             if (!isNaN(value)) {
