@@ -8,10 +8,10 @@ import ExpenseTotal from './components/ExpenseTotal';
 import AllocationForm from './components/AllocationForm';
 import CurrencyDropdown from './components/CurrencyDropdown';
 import { AppProvider } from './context/AppContext';
-import { CurrencyContext } from './context/CurrencyContext'; // import the context
+import { CurrencyContext } from './context/CurrencyContext';
 
 const App = () => {
-    const [currency, setCurrency] = useState('£'); // add state for the currency
+    const [currency, setCurrency] = useState('£'); 
 
     return (
         <AppProvider>
